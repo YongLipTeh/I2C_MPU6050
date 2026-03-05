@@ -41,11 +41,11 @@ When *HAL_I2C_IsDeviceReady()* is sent to the sensor, we can see the I2C signal 
 <img width="1430" height="247" alt="image2" src="https://github.com/user-attachments/assets/71a4fc90-a605-4ac7-bf57-70fa3bcbd3f2" />
 
 Figure 2 shows the I2C signal. The MCU writes and reads the signal to find out the ID value of the sensor.
-## A Cloned MPU6050 chip?
-I2C is always configured to Write first and foremost, it writes to the corresponding address, and restarts and read the value of the desired register. The master (MCU) tells the slave which address it is looking at (0x75) in this case. It turns out to be the *WHO_AM_I* register. The master measures a value of 0x70 from the slave. From the datasheet, the actual value of *WHO_AM_I* should have been 0x68. This tells us that this is not a genuine MPU6050 sensor, and it is very likely to be a clone chip. 
+## A Cloned MPU6050 Chip?
+I2C is always configured to Write first and foremost, it writes to the corresponding address, and restarts and read the value of the desired register. The master (MCU) tells the slave which address it is looking at (0x75) in this case. It turns out to be the *WHO_AM_I* register. The master measures a value of 0x70 from the slave. From the [datasheet](https://cdn.sparkfun.com/datasheets/Sensors/Accelerometers/RM-MPU-6000A.pdf), the actual value of *WHO_AM_I* should have been 0x68. This tells us that this is not a genuine MPU6050 sensor, and it is very likely to be a clone chip. 
 
 Since this MPU6050 module was bought from AliExpress, combined with the wrong _WHO_AM_I_ response, and the fact that MPU6050 is no longer in mass production from the original manufacturer despite its commonness, the probability that this is a cloned chip is quite high.
-
+## Continuing Initializing
 When the master is done reading, we can see that SDA signal remains high during the entire length of SCL signal (around 2358μs). This is a negative acknowledgement signal and tells the master the signal has ended and it can stop the I2C communication. Note that there is a repeated start signal (blue Sr signature) indicating that the I2C allows the writing part to end but allows the master the control of the bus immediately without giving up its turn. 
 
 <img width="1431" height="207" alt="image3" src="https://github.com/user-attachments/assets/73f2d17d-e271-4987-8295-b0c69aa1d618" />
