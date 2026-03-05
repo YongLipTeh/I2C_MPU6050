@@ -52,7 +52,7 @@ When the master is done reading, we can see that SDA signal remains high during 
 
 Figure 3 shows the process of *Read-Modify-Write* (RMW) and a final Read to turn on a bit and verifying it.
 
-This is the RMW measured with a logic analyzer. First, the master (CPU) writes to the slave the address 0x6B, which is *PWR_MGMT_1*. The slave replies with a value of 0x01 = 0b00000001. The sixth bit is already 0 (the sensor is already awake). According to the datasheet, it should have been 0b00000010, with the sixth bit being on by default (sensor is asleep for low power mode). This is another indication that MPU6050 is a clone chip. The signal is then written (no change) and read again (unchanged). 
+This is the RMW measured with a logic analyzer. First, the master (CPU) writes to the slave the address 0x6B, which is *PWR_MGMT_1*. The slave replies with a value of 0x01 = 0b00000001. The sixth bit is already 0 (the sensor is already awake). According to the datasheet, it should have been 0b00000010, with the sixth bit being on by default (sensor is asleep for low power mode). This is _another indication_ that MPU6050 is a **clone** chip. The signal is then written (no change) and read again (unchanged). 
 
 Although this was not the intended method, it is safe because we have not changed any other bits (besides possibly the sixth one). In the clone chip, it is designed to wake up directly instead of staying asleep, this convenience factor is probably why the manufacters altered the design of MPU6050.
 ## Data Measurement
