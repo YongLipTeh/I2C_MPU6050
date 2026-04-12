@@ -64,15 +64,15 @@ Figure 4 shows the acutal data transmission from MPU6050. This is a 14-byte mess
 
 Using a logic analyzer, we can see the raw data being sent. As usual, the CPU writes to the slave, and tries to read ACCEL_XOUT_H. This register contains 14 bytes of information, the order are as follows.
 
-1.	Bit 0 & bit 1 : Accelerometer x-axis
-2.	Bit 2 & bit 3 : Accelerometer y-axis
-3.	Bit 4 & bit 5 : Accelerometer z-axis
-4.	Bit 6 & bit 7 : Ambient Temperature
-5.	Bit 8 & bit 9 : Gyroscope x-axis
-6.	Bit 10 & bit 11 : Gyroscope y-axis
-7.	Bit 12 & bit 13 : Gyroscope z-axis
+1.	Byte 0 & byte 1 : Accelerometer x-axis
+2.	Byte 2 & byte 3 : Accelerometer y-axis
+3.	Byte 4 & byte 5 : Accelerometer z-axis
+4.	Byte 6 & byte 7 : Ambient Temperature
+5.	Byte 8 & byte 9 : Gyroscope x-axis
+6.	Byte 10 & byte 11 : Gyroscope y-axis
+7.	Byte 12 & byte 13 : Gyroscope z-axis
 
-The bits are concatenated together to a 16-bit integer using this formula: ( High Byte << 8 ) | Low Byte. The first bit of high byte is the most significant bit (MSB) while the last bit of the low byte is the least significant bit (LSB). 
+The bytes are concatenated together to a 16-bit integer using this formula: ( High Byte << 8 ) | Low Byte. The first bit of high byte is the most significant bit (MSB) while the last bit of the low byte is the least significant bit (LSB). 
 
 Finally, the read data are given in non-usual units (pure integers). A conversion script is provided for direct conversion, using the data read from figure 4, we get a physical unit of
 
